@@ -51,8 +51,8 @@ renderStream.on('end', function() {
     var smsTwiML = '';
     var renderStream = mu.compileAndRender('sms.xml', {
       responders: config.responders,
-      source: '555-555-5555',
-      message: 'I am a message'
+      source: req.body.From,
+      message: req.body.Body
     });
     renderStream.on('data', function(data) {
       smsTwiML += data.toString();
