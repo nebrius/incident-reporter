@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
 {{#responders}}
-  <Message to="{{phone}}">URGENT! NodeBots SF incident report from {{source}}: "{{message}}"</Message>
+  <Message to="{{phone}}">URGENT! {{name}} incident report from {{source}}: "{{message}}"</Message>
 {{/responders}}
 </Response>

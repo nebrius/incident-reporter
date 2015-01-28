@@ -29,14 +29,14 @@ var bodyParser = require('body-parser');
 var async = require('async');
 var mu = require('mu2');
 
-var config = JSON.parse(fs.readFileSync('/etc/nodebotssf/config.json').toString());
+var config = JSON.parse(fs.readFileSync('/etc/incident-reporter/config.json').toString());
 
 mu.root = path.join(__dirname, 'templates');
 var voiceTwiML = '';
 var noAnswerTwiML = '';
 async.parallel([
   function(next) {
-    var renderStream = mu.compileAndRender('voice.xml', config.voice);
+    var renderStream = mu.compileAndRender('voice.xml', config);
     renderStream.on('data', function(data) {
       voiceTwiML += data.toString();
     });
@@ -67,6 +67,7 @@ async.parallel([
     var smsTwiML = '';
     var renderStream = mu.compileAndRender('sms.xml', {
       responders: config.sms.responders,
+      name: config.organization.name,
       source: req.body.From,
       message: req.body.Body
     });
@@ -90,6 +91,6 @@ async.parallel([
   var server = app.listen(8000, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log('NodeBots SF incident reporting system listening at http://%s:%s', host, port);
+    console.log('Incident reporting system listening at http://%s:%s', host, port);
   });
 });

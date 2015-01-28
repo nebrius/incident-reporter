@@ -1,21 +1,21 @@
 {
-  "name": "nodebotssf-incident",
+  "name": "incident-reporter",
   "version": "1.0.0",
-  "description": "Incident reporting system for NodeBots SF",
+  "description": "Incident reporting system and hotline for events using Twilio",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bryan-m-hughes/nodebotssf-incident.git"
+    "url": "https://github.com/bryan-m-hughes/incident-reporter.git"
   },
   "author": "Bryan Hughes <bryan@theoreticalideations.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bryan-m-hughes/nodebotssf-incident/issues"
+    "url": "https://github.com/bryan-m-hughes/incident-reporter/issues"
   },
-  "homepage": "https://github.com/bryan-m-hughes/nodebotssf-incident",
+  "homepage": "https://github.com/bryan-m-hughes/incident-reporter",
   "dependencies": {
     "async": "^0.9.0",
     "body-parser": "^1.10.2",

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="woman">Unfortunately, it looks like {{name}} is unavailable. Please send a text message to this number, and it will be sent to all of the organizers, or send an email to incidents at nodebots s.f. dot org</Say>
+  <Say voice="woman">Unfortunately, it looks like {{name}} is unavailable. If this is an emergency, please call 9 1 1. Otherwise, please send a text message to this number, and it will be sent to all of the organizers. You can also send an email to {{pronounceableEmail}}</Say>
 </Response>
