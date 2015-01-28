@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="woman">Unfortunately, it looks like {{name}} is unavailable. Please send a text message to this number, and it will be sent to all of the organizers, or send an email to incidents at nodebots s.f. dot org</Say>
+</Response>

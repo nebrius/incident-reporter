@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Dial>{{responder}}</Dial>
+  <Say voice="woman">Thank you for calling the NodeBots S.F. incident line. You will be connected to {{name}}</Say>
+  <Dial action="no_answer.xml" method="POST">{{phone}}</Dial>
 </Response>

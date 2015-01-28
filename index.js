@@ -26,17 +26,34 @@ var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
+var async = require('async');
 var mu = require('mu2');
 
 var config = JSON.parse(fs.readFileSync('/etc/nodebotssf/config.json').toString());
 
 mu.root = path.join(__dirname, 'templates');
 var voiceTwiML = '';
-var renderStream = mu.compileAndRender('voice.xml', config.voice);
-renderStream.on('data', function(data) {
-  voiceTwiML += data.toString();
-});
-renderStream.on('end', function() {
+var noAnswerTwiML = '';
+async.parallel([
+  function(next) {
+    var renderStream = mu.compileAndRender('voice.xml', config.voice);
+    renderStream.on('data', function(data) {
+      voiceTwiML += data.toString();
+    });
+    renderStream.on('end', function() {
+      next(null);
+    });
+  },
+  function(next) {
+    var renderStream = mu.compileAndRender('no_answer.xml', config.voice);
+    renderStream.on('data', function(data) {
+      noAnswerTwiML += data.toString();
+    });
+    renderStream.on('end', function() {
+      next(null);
+    });
+  }
+], function() {
 
   var app = express();
 
@@ -47,7 +64,6 @@ renderStream.on('end', function() {
   });
 
   app.post('/sms/', function (req, res) {
-    console.log(req.body);
     var smsTwiML = '';
     var renderStream = mu.compileAndRender('sms.xml', {
       responders: config.sms.responders,
@@ -60,6 +76,15 @@ renderStream.on('end', function() {
     renderStream.on('end', function() {
       res.send(smsTwiML);
     });
+  });
+
+  app.post('/voice_response/', function (req, res) {
+    var callStatus = req.body.DialCallStatus;
+    if (callStatus != 'completed') {
+      res.send(noAnswerTwiML);
+    } else {
+      res.send('<?xml version="1.0" encoding="UTF-8"?>'); // Blank response...right?
+    }
   });
 
   var server = app.listen(8000, function () {
