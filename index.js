@@ -32,7 +32,7 @@ var config = JSON.parse(fs.readFileSync('/etc/nodebotssf/config.json').toString(
 
 mu.root = path.join(__dirname, 'templates');
 var voiceTwiML = '';
-var renderStream = mu.compileAndRender('voice.xml', config);
+var renderStream = mu.compileAndRender('voice.xml', config.voice);
 renderStream.on('data', function(data) {
   voiceTwiML += data.toString();
 });
@@ -50,7 +50,7 @@ renderStream.on('end', function() {
     console.log(req.body);
     var smsTwiML = '';
     var renderStream = mu.compileAndRender('sms.xml', {
-      responders: config.responders,
+      responders: config.sms.responders,
       source: req.body.From,
       message: req.body.Body
     });
