@@ -25,42 +25,41 @@ SOFTWARE.
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
+var bodyParser = require('body-parser');
 var mu = require('mu2');
-var async = require('async');
-var app = express();
 
 var config = JSON.parse(fs.readFileSync('/etc/nodebotssf/config.json').toString());
 
 mu.root = path.join(__dirname, 'templates');
-async.parallel({
-  voice: function(next) {
-    var text = '';
-    var renderStream = mu.compileAndRender('voice.xml', config);
-    renderStream.on('data', function(data) {
-      text += data.toString();
-    });
-    renderStream.on('end', function() {
-      next(null, text);
-    });
-  },
-  sms: function(next) {
-    var text = '';
-    var renderStream = mu.compileAndRender('sms.xml', config);
-    renderStream.on('data', function(data) {
-      text += data.toString();
-    });
-    renderStream.on('end', function() {
-      next(null, text);
-    });
-  }
-}, function (err, results) {
+var voiceTwiML = '';
+var renderStream = mu.compileAndRender('voice.xml', config);
+renderStream.on('data', function(data) {
+  voiceTwiML += data.toString();
+});
+renderStream.on('end', function() {
+
+  var app = express();
+
+  app.use(bodyParser.urlencoded({ extended: false }))
 
   app.post('/voice/', function (req, res) {
-    res.send(results.voice);
+    res.send(voiceTwiML);
   });
 
   app.post('/sms/', function (req, res) {
-    res.send(results.sms);
+    console.log(req.body);
+    var smsTwiML = '';
+    var renderStream = mu.compileAndRender('sms.xml', {
+      responders: config.responders,
+      source: '555-555-5555',
+      message: 'I am a message'
+    });
+    renderStream.on('data', function(data) {
+      smsTwiML += data.toString();
+    });
+    renderStream.on('end', function() {
+      res.send(smsTwiML);
+    });
   });
 
   var server = app.listen(8000, function () {

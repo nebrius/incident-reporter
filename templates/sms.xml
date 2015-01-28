@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
 {{#responders}}
-  <Message to="{{phone}}">Hello, Mobile Monkey</Message>
+  <Message to="{{phone}}">URGENT! NodeBots SF incident report from {{source}}. Message is: "{{message}}"</Message>
 {{/responders}}
 </Response>
