@@ -3,6 +3,41 @@ Incident Reporter
 
 Incident reporting system and hotline for events using Twilio.
 
+If you run an event, you should have a [Code of Conduct](), and if you have a Code of Conduct, you should have contact information. Event email is simple to set up, but getting a phone system that provides text-to-many capabilities while keeping organizers phone numbers private isn't quite so simple.
+
+This module provides the server setup necessary to work with Twilio to provide text and voice forwarding to organizers.
+
+## Installation
+
+```Bash
+npm install -g incident-reporter
+```
+
+## Configuration
+
+Create a configuration file at ```/etc/incident-reporter/config.json```. You can start by copying the [example configuration file](config.example.json).
+
+It is recommended that you run this server behind a web server such as nginx. For nginx, add this to your config inside a server declaration:
+
+```
+location /twilio/ {
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header Host $http_host;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_pass http://localhost:8000/;
+  proxy_set_header Host $host;
+  proxy_buffering off;
+}
+```
+
+Then, in your Twilio phone configuration through their website, set the following urls:
+- Voice Request URL: http(s)://<your server here>/twilio/voice/
+- Messaging Request URL: http(s)://<your server here>/twilio/sms/
+
+## Running
+
+You can run it with ```incident-reporter``` if you like, but using a process manager like [pm2](https://github.com/Unitech/pm2) is recommended. This is only designed to run on *nix systems (sorry Windows).
+
 License
 =======
 
