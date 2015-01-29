@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say voice="woman">Thank you for calling the {{#organization}}{{name}}{{/organization}} incident line. You will be connected to {{#voice}}{{name}}{{/voice}}</Say>
-  <Dial action="no_answer.xml" method="POST">{{#voice}}{{phone}}{{/voice}}</Dial>
+  <Dial action="voice_response/" method="POST">{{#voice}}{{phone}}{{/voice}}</Dial>
 </Response>

@@ -57,11 +57,7 @@ async.parallel([
 
   var app = express();
 
-  app.use(bodyParser.urlencoded({ extended: false }))
-
-  app.post('/voice/', function (req, res) {
-    res.send(voiceTwiML);
-  });
+  app.use(bodyParser.urlencoded({ extended: false }));
 
   app.post('/sms/', function (req, res) {
     var smsTwiML = '';
@@ -77,6 +73,10 @@ async.parallel([
     renderStream.on('end', function() {
       res.send(smsTwiML);
     });
+  });
+
+  app.post('/voice/', function (req, res) {
+    res.send(voiceTwiML);
   });
 
   app.post('/voice_response/', function (req, res) {
