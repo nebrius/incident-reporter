@@ -3,7 +3,7 @@ Incident Reporter
 
 Incident reporting system and hotline for events using Twilio.
 
-If you run an event, you should have a [Code of Conduct](), and if you have a Code of Conduct, you should have contact information. Event email is simple to set up, but getting a phone system that provides text-to-many capabilities while keeping organizers phone numbers private isn't quite so simple.
+If you run an event, you should have a [Code of Conduct](http://www.ashedryden.com/blog/codes-of-conduct-101-faq), and if you have a Code of Conduct, you should have contact information. Event email is simple to set up, but getting a phone system that provides text-to-many capabilities while keeping organizers phone numbers private isn't quite so simple.
 
 This module provides the server setup necessary to work with Twilio to provide text and voice forwarding to organizers.
 
