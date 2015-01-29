@@ -1,6 +1,7 @@
 {
   "organization": {
-    "name": "My Event Name"
+    "name": "My Event Name",
+    "url_prefix": "http://example.com/twilio/"
   },
   "sms": {
     "responders": [
