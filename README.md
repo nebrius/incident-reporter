@@ -31,8 +31,8 @@ location /twilio/ {
 ```
 
 Then, in your Twilio phone configuration through their website, set the following urls:
-- Voice Request URL: http(s)://<your server here>/twilio/voice/
-- Messaging Request URL: http(s)://<your server here>/twilio/sms/
+- Voice Request URL: ```http(s)://<your server here>/twilio/voice/```
+- Messaging Request URL: ```http(s)://<your server here>/twilio/sms/```
 
 ## Running
 
