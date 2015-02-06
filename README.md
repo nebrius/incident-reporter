@@ -36,7 +36,7 @@ Then, in your Twilio phone configuration through their website, set the followin
 
 ## Running
 
-You can run it with ```incident-reporter``` if you like, but using a process manager like [pm2](https://github.com/Unitech/pm2) is recommended. This is only designed to run on *nix systems (sorry Windows).
+You can run it with ```incident-reporter``` if you like, but using a process manager like [pm2](https://github.com/Unitech/pm2) is recommended. This is has only been tested to run on *nix systems (sorry Windows, pull requests welcome if there are issues).
 
 License
 =======
